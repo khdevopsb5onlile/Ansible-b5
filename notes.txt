@@ -641,8 +641,7 @@ IQ] can you explain varibles and its priority in ansible?
 1. command line variables
 2. variables in file
 3. varibales in play-book
-4. host-variables
-5. group variables
+
 
 another approach
 ----------------
@@ -696,46 +695,7 @@ IQ] if i defined variables in plabook and vars.yaml which one will take?
 
 
 
-group_vars
-==========
-In Ansible, group_vars is a powerful feature that allows you to define variables that apply to a group of hosts in your inventory. This is particularly useful for managing configurations that differ between different environments (like production and staging) or for organizing variables by application or role.
 
-requirement:
------------
-install java 11 in prod
-install java 8 in staging
-
-
-step 1: create a dir in /var/ansible
-
-  sudo  mkdir /var/ansible/group_vars
-  
-step 2: create /var/ansible/group_vars/prod.yaml
-
-   javaVersion: java-11-openjdk-devel
-
-
-step 3: create /var/ansible/host_vars/172.31.0.117.yaml
-
-  javaVersion: java-1.8.0-openjdk-devel
-
-
-step 4:
-
-- hosts: all
-  become: true
-  gather_facts: no
-  tasks:
-    - name: Installing java
-      yum:
-        name: "{{ javaVersion }}"
-
-
-NOTE: It is not installed for un grouped servers, so pls create all.yaml then place variable for ungrouped hosts.
-
-
-host_vars
-==========
 
 
 
